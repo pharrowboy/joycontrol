@@ -204,7 +204,16 @@ async def button_press(controller_state, *buttons):
 
     # wait until report is send
     await controller_state.send()
+    
+    
+async def button_update(controller_state, button, value):
+    button_state = controller_state.button_state
 
+    # update button state
+    button_state.set_button(button, pushed=value)
+
+    # send report
+    await controller_state.send()  
 
 async def button_release(controller_state, *buttons):
     """
